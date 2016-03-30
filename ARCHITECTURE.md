@@ -98,6 +98,30 @@ This folder structure is inspired by Google's [Best Practice Recommendations](ht
   * package.json: NPM configuration file (also used by JSPM)
   * protractor.conf.js: Protractor e2e test configuration file
 
+# Components
+ 
+## Design approach
+The idea being to isolate components as much as possible so that removing one can be done in a clean manner without worrying (too much) about side-effects.
+Think of components as custom elements that enclose specific semantics, styling, and behaviour.
+ 
+*A component should solve one problem and solve it well.*
+ 
+## Naming convention
+ *  <component-name>: folder for the component (mandatory)
+   *  <component-name>.styl: styles for the component (optional)
+   *  <component-name>.js: model of the component (optional)
+   *  <component-name>.spec.ts: tests for the controller of the component (recommended)
+   *  <component-name>.html: template/partial view of the component (mandatory)
+   *  <component-name>.service.js: service for the component (optional)
+   *  <component-name>.service.spec.ts: tests for the service of the component (optional)
+ 
+If the component name is composed (which you should avoid if possible), then separate the parts with periods (.).
+ 
+### Additional guidelines
+ * each component MUST be placed in its own directory
+ respect the namespace rule above to correctly isolate/encapsulate the component
+ * components CANNOT be nested (i.e., use a flat structure)
+
 ### Minimal (build-related) required file contents
 Although we want to limit this list as much as possible, for everything to build successfully, some files need specific contents:
 
