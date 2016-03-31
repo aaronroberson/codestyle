@@ -118,15 +118,15 @@ related components and providing a single interface for importing the composed m
 For Aurelia, and other projects that favor convention over configuration, a module may simple compose multiple modules and not concern itself with exporting it's sub-components.
 
 ### Naming convention
- *  <module-name>: folder for the component
-   *  <module-name>.module.js: model of the component
-   *  <module-name>.module.spec.js: tests for the controller of the component
-   *  <module-name>.component.module.js: service for the component
-   *  <module-name>.component.module.spec.js: tests for the service of the component
-   *  <component-name>.component.html: template/partial view of the component
-   *  <component-name>.component.js: model of the component
-   *  <component-name>.component.styl: styles for the component
-   *  <component-name>.component.spec.js: tests for the controller of the component
+ *  module-name: folder for the component
+   *  module-name.module.js: model of the component
+   *  module-name.module.spec.js: tests for the controller of the component
+   *  module-name.component.module.js: service for the component
+   *  module-name.component.module.spec.js: tests for the service of the component
+   *  component-name.component.html: template/partial view of the component
+   *  component-name.component.js: model of the component
+   *  component-name.component.styl: styles for the component
+   *  component-name.component.spec.js: tests for the controller of the component
    
 #### Example
 An example of an ES6 module with individual exports and composed exports:
@@ -160,13 +160,13 @@ Think of components as custom elements that enclose specific semantics, styling,
 *A component should solve one problem and solve it well.*
  
 ### Naming convention
- *  <component-name>: folder for the component
-   *  <component-name>.component.html: template/partial view of the component
-   *  <component-name>.component.js: model of the component
-   *  <component-name>.component.styl: styles for the component
-   *  <component-name>.component.spec.js: tests for the controller of the component
-   *  <component-name>.component.service.js: service for the component
-   *  <component-name>.component.service.spec.js: tests for the service of the component
+ *  component-name>: folder for the component
+   *  component-name.component.html: template/partial view of the component
+   *  component-name.component.js: model of the component
+   *  component-name.component.styl: styles for the component
+   *  component-name.component.spec.js: tests for the controller of the component
+   *  component-name.component.service.js: service for the component
+   *  component-name.component.service.spec.js: tests for the service of the component
  
 If the component name is composed (which you should avoid if possible), then separate the parts with periods (.).
  
@@ -182,11 +182,11 @@ In projects where views have another meaning such as for partials or full-page s
 Pages can also be considered as *components* but they are an *aggregations* of other components and modules as well as specific HTML/CSS/JS.
 
 ### Naming convention
- *  <page-name>: folder for the page
-   *  <page-name>.page.html: template/partial view of the page
-   *  <page-name>.page.js: model of the page
-   *  <page-name>.page.styl: styles for the page
-   *  <page-name>.page.spec.js: tests for the controller of the page
+ *  page-name: folder for the page
+   *  page-name.page.html: template/partial view of the page
+   *  page-name.page.js: model of the page
+   *  page-name.page.styl: styles for the page
+   *  page-name.page.spec.js: tests for the controller of the page
    
 ## Core files
 The core files of the application required for running the application.
