@@ -121,8 +121,8 @@ For Aurelia, and other projects that favor convention over configuration, a modu
  *  module-name: folder for the component
    *  module-name.module.js: model of the component
    *  module-name.module.spec.js: tests for the controller of the component
-   *  module-name.component.module.js: service for the component
-   *  module-name.component.module.spec.js: tests for the service of the component
+   *  module-name.service.js: service for the component
+   *  module-name.service.spec.js: tests for the service of the component
    *  component-name.component.html: template/partial view of the component
    *  component-name.component.js: model of the component
    *  component-name.component.styl: styles for the component
