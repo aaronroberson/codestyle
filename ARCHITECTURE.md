@@ -1,6 +1,15 @@
 # File Architecture 
 
-Folder structure, files and naming conventions proposed for enterprise applications.
+## Introduction
+
+The purpose of this document is to outline a mostly sensible folder and file architecture for front-end development of non-trivial applications.
+The guiding principle of this architecture is to create hundreds (and possibly thousands) of small, single-purpose components.
+The design goal of each component is that it is completely autonomous, and is agnostic of it's surrounding environment.
+While components can be composed of other components, any component that is composed of two or more components should alert the developers intuition to a possible code smell.
+Such components are better logically grouped as modules.
+
+## Folder Structure
+
 This folder structure is inspired by Google's [Best Practice Recommendations](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub).
 
         ├── doc/
@@ -69,6 +78,7 @@ This folder structure is inspired by Google's [Best Practice Recommendations](ht
         ├── protractor.conf.js
         └── READMME.md
 
+### Quick overview
 * project root
   * doc: Folder containing all documentation and changelog
   * gulp: Folder containing all gulp tasks and configuration files
@@ -99,8 +109,50 @@ This folder structure is inspired by Google's [Best Practice Recommendations](ht
   * package.json: NPM configuration file (also used by JSPM)
   * protractor.conf.js: Protractor e2e test configuration file
 
-# Directories
- 
+## Directories
+
+### Modules
+
+In projects using ES6 and leveraging module exports, a module can be solely responsible for composing multiple logically
+related components and providing a single interface for importing the composed module and destructuring it's individual exports.
+For Aurelia, and other projects that favor convention over configuration, a module may simple compose multiple modules and not concern itself with exporting it's sub-components.
+
+### Naming convention
+ *  <module-name>: folder for the component
+   *  <module-name>.module.js: model of the component
+   *  <module-name>.module.spec.js: tests for the controller of the component
+   *  <module-name>.component.module.js: service for the component
+   *  <module-name>.component.module.spec.js: tests for the service of the component
+   *  <component-name>.component.html: template/partial view of the component
+   *  <component-name>.component.js: model of the component
+   *  <component-name>.component.styl: styles for the component
+   *  <component-name>.component.spec.js: tests for the controller of the component
+   
+#### Example
+An example of an ES6 module with individual exports and composed exports:
+
+```
+import {AccountModel} from './account.model';
+import {AccountService} from './account.service';
+import {AccountList} from './account-list.component';
+import {AccountDetail} from './account-detail.component';
+
+export *  from './account.model';
+export * from './account.service';
+export * from './account-list.component';
+export * from './account-detail.component';
+
+export var ACCOUNT_DIRECTIVES: Array<any> = [
+  AccountList,
+  AccountDetail
+];
+
+export var ACCOUNT_PROVIDERS: Array<any> = [
+  AccountModel,
+  AccountService
+];
+```
+   
 ### Components
 The idea being to isolate components as much as possible so that removing one can be done in a clean manner without worrying (too much) about side-effects.
 Think of components as custom elements that enclose specific semantics, styling, and behaviour.
@@ -123,10 +175,11 @@ If the component name is composed (which you should avoid if possible), then sep
  respect the namespace rule above to correctly isolate/encapsulate the component
  * components CANNOT be nested (i.e., use a flat structure)
  
-## Pages 
-This folder should contain all the routed *pages* of the application.
+## Pages
+This folder should contain all the routed *pages* or *views* of the application. The naming of `pages` can be substituted for `views` if desired and applicable.
+In projects where views have another meaning such as for partials or full-page static views (i.e. 404, 500, etc) it is more applicable to use `pages` nomenclature. 
 
-Pages can also be considered as *components* but they are *aggregations* of other components and modules as well as specific HTML/CSS/JS.
+Pages can also be considered as *components* but they are an *aggregations* of other components and modules as well as specific HTML/CSS/JS.
 
 ### Naming convention
  *  <page-name>: folder for the page
@@ -142,8 +195,6 @@ The core files of the application required for running the application.
 This is the top element of the application. This should be loaded by src/main.js (see below).
 
 ```
-"use strict";
-
 export class App {
 	...
 	constructor(){
@@ -288,7 +339,7 @@ Configuration Reference: http://karma-runner.github.io/0.13/config/configuration
 
 Dev dependencies:
 ```
-	"jasmine": "...",
-	"karma-jasmine": "...",
-	"karma-jspm": "..."
+"jasmine": "...",
+"karma-jasmine": "...",
+"karma-jspm": "..."
 ```
